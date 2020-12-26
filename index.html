@@ -1,0 +1,449 @@
+<!doctype html>
+
+<html dir="ltr" lang="EN">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+
+        <title>Eslam Ahmed</title>
+
+        <meta name="keywords" content="Eslam Ahmed">
+        <meta name="subject" content="Eslam Ahmed">
+        <meta name="copyright" content="Eslam Ahmed">
+        <meta name="description" content="Eslam Ahmed">
+        <meta name="author" content="Eslam Ahmed">
+        <meta name="robots" content="index,follow">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/fa/css/all.css">
+
+    </head>
+
+    <body class="main-screen">
+        <div class="desktop-screen">
+            
+            <div class="side-bar">
+                <a href="#" class="icon"><i class="fas fa-info"></i><span class="tooltiptext">Tooltip text</span></a>
+<!--
+                <a href="#" class="icon"><i class="fas fa-info"></i></a>
+                <a href="#" class="icon"><i class="fas fa-info"></i></a>
+                <a href="#" class="icon"><i class="fas fa-info"></i></a>
+-->
+            </div>
+            
+            <div class="window" maximized="false" icon-i="fas fa-info" icon-color="white" icon-bg-color="red" icon-name="Contacts">
+                <div class="window-header">
+                    <div class="resize-border-top"></div>
+                    <div class="info">
+                        <span class="close" onclick="closeWindow(this)"></span>
+                        <span class="minimize" onclick=""></span>
+                        <span class="maximize" onclick="maxWindow(this)"></span>
+                        <span class="info-text">asd</span>
+                    </div>
+                    <div class="sub-info">
+                        <span class="sub-info-icon" onclick="contactsScreen(this, 'contacts', true)"><i class="far fa-chevron-left"></i></span><span class="sub-info-text">asd</span>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="translucent-panel">
+                        <img src="imgs/profile.jpg" onclick="contactsScreen(this, 'contacts', true)"/>
+                        <h5 onclick="contactsScreen(this, 'contacts', true)">Eslam Ahmed</h5>
+                        <ul class="links-List">
+                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-envelope"></i><span>Mail</span></li></a>
+                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-phone flip"></i><span>Phone</span></li></a>
+                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-users"></i><span>Socials</span></li></a>
+                        </ul>
+                    </div>
+                    <div class="main-panel"><div class="content" id="contacts-panel"></div></div>
+                </div>
+                <div class="resize-border-left"></div>
+            </div>
+            
+            <div class="window" maximized="false" icon-i="fas fa-shapes" icon-color="white" icon-bg-color="blue" icon-name="Projects">
+                <div class="window-header">
+                    <div class="resize-border-top"></div>
+                    <div class="info">
+                        <span class="close" onclick="closeWindow(this)"></span>
+                        <span class="minimize" onclick=""></span>
+                        <span class="maximize" onclick="maxWindow(this)"></span>
+                        <span class="info-text"></span>
+                    </div>
+                    <div class="sub-info">
+                        <span class="sub-info-icon" onclick="contactsScreen(this, 'projects', true)"><i class="far fa-chevron-left"></i></span><span class="sub-info-text">Projects</span>
+                    </div>
+                </div>
+                <div class="window-body">
+                    <div class="translucent-panel">
+                        <input type="search" name="projectsSearch" placeholder="Search"/>
+                        <ul class="links-List">
+                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-mobile-android"></i><span>Mobile Apps</span></li></a>
+                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-browser"></i><span>Web Apps</span></li></a>
+                        </ul>
+                    </div>
+                    <div class="main-panel"><div class="content" id="projects-panel"></div></div>
+                </div>
+                <div class="resize-border-left"></div>
+            </div>
+            
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        <script>
+            var screen = document.querySelector('.desktop-screen');
+            var sideBar = document.querySelector('.side-bar');
+            
+            var availArea = screen.offsetHeight  - sideBar.offsetHeight ;
+            
+            sideBar.style.top = availArea/2 + "px";
+            
+            var windows = document.querySelectorAll('.window'), i, n;
+            
+            
+            for (i = 0; i < windows.length; ++i) {
+                var newAnchorNode = document.createElement("A");
+                newAnchorNode.classList.add('icon');
+                
+                var newINode = document.createElement("I");
+                
+                var newTooltip = document.createElement("SPAN");
+                newTooltip.classList.add('tooltiptext');
+                newTooltip.innerHTML = windows[i].getAttribute("icon-name");
+                
+                var iconList = windows[i].getAttribute("icon-i").split(" ");
+                
+                newAnchorNode.style.background = windows[i].getAttribute("icon-bg-color");
+                newAnchorNode.style.color = windows[i].getAttribute("icon-color");
+                
+                
+//                .style.left = '15px';
+                for (n=0; n<iconList.length; n++) {
+                    newINode.classList.add(iconList[n]);
+                }
+                newAnchorNode.appendChild(newINode);
+                newAnchorNode.appendChild(newTooltip);
+                newAnchorNode.setAttribute("onclick", "openWindow(" + i + ")");
+                sideBar.appendChild(newAnchorNode);
+                
+                
+            }
+            
+            
+            fetch('screens/contacts.html')
+              .then(response => response.text())
+              .then(text => document.querySelector('#contacts-panel').innerHTML=text);     
+            
+            fetch('screens/projects.html')
+              .then(response => response.text())
+              .then(text => document.querySelector('#projects-panel').innerHTML=text);     
+            
+            
+            
+            var lastZ = 10;
+            var initPos = 20;
+
+            //Make the all element draggagle:
+            for (i = 0; i < windows.length; ++i) {
+                windows[i].style.left = initPos + "%";
+                windows[i].style.top = initPos + "%";
+                initPos+=5;
+                dragElement(windows[i]);
+                startResize(windows[i]);
+            }
+
+            function dragElement(elmnt) {
+                
+                
+//                console.log("initiated");
+                var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                
+                if (elmnt.querySelector(".window-header")) {
+                    /* if present, the header is where you move the DIV from:*/
+                    elmnt.querySelector(".window-header").onmousedown = dragMouseDown;
+                } 
+//                else {
+//                    /* otherwise, move the DIV from anywhere inside the DIV:*/
+//                }
+//                    elmnt.onmousedown = dragMouseDown;
+
+                function dragMouseDown(e) {
+                    console.log('drag started');
+                    
+                    
+//                    console.log("drag started");
+                    e = e || window.event;
+                    e.preventDefault();
+                    elmnt.style.zIndex = lastZ++;
+                    // get the mouse cursor position at startup:
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    if (e.offsetX>4 && e.offsetY>4){
+                        document.onmouseup = closeDragElement;
+                        // call a function whenever the cursor moves:
+                        document.onmousemove = elementDrag;
+                    }
+                }
+
+                function elementDrag(e) {
+                    elmnt.classList.add('window-no-transition');
+//                    console.log("dragging element moving");
+                    e = e || window.event;
+                    e.preventDefault();
+                    
+                    
+                    // calculate the new cursor position:
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    // set the element's new position:
+                    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                }
+
+                function closeDragElement() {
+                    
+                    elmnt.offsetHeight; // Trigger a reflow, flushing the CSS changes
+                    elmnt.offsetWidth; // Trigger a reflow, flushing the CSS changes
+                    elmnt.classList.remove('window-no-transition');
+                    
+//                    console.log("dragging element closed");
+                    /* stop moving when mouse button is released:*/
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
+            
+            const BORDER_SIZE = 4;
+//            const windows = document.querySelector('.window');
+            
+            function startResize(panel) {
+                var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+                let m_pos;
+                function resizeLeft(e){
+                  const dx = m_pos - e.x;
+                  m_pos = e.x;
+                  panel.style.width = (parseInt(getComputedStyle(panel, '').width) + dx) + "px";
+
+                    // calculate the new cursor position:
+                        pos1 = pos3 - e.clientX;
+    //                    pos2 = pos4 - e.clientY;
+                        pos3 = e.clientX;
+    //                    pos4 = e.clientY;
+                        // set the element's new position:
+//                        panel.style.top = (panel.offsetTop - pos2) + "px";
+                        panel.style.left = (panel.offsetLeft - pos1) + "px";
+
+                }
+
+                function resizeRight(e){
+                  const dx = e.x - m_pos ;
+                  m_pos = e.x;
+                  panel.style.width = (parseInt(getComputedStyle(panel, '').width) + dx) + "px";
+
+
+                }
+                
+                function resizeTop(e){
+                  const dy = m_pos - e.y;
+                  m_pos = e.y;
+                  panel.style.height = (parseInt(getComputedStyle(panel, '').height) + dy) + "px";
+
+                    // calculate the new cursor position:
+//                        pos1 = pos3 - e.clientX;
+                        pos2 = pos4 - e.clientY;
+//                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        // set the element's new position:
+                        panel.style.top = (panel.offsetTop - pos2) + "px";
+//                        panel.style.left = (panel.offsetLeft - pos1) + "px";
+
+                }
+                
+                function resizeBottom(e){
+                  const dy =   e.y - m_pos ;
+                  m_pos = e.y;
+                  panel.style.height = (parseInt(getComputedStyle(panel, '').height) + dy) + "px";
+
+
+                }
+
+                panel.addEventListener("mousedown", function(e){
+                    panel.style.zIndex = lastZ++;
+
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+    //                document.onmouseup = closeDragElement;
+                    // call a function whenever the cursor moves:
+    //                document.onmousemove = elementDrag;
+
+                    panel.classList.add('window-no-transition');
+                    if (e.offsetX < BORDER_SIZE) {
+                        m_pos = e.x;
+                        document.addEventListener("mousemove", resizeLeft, false);
+                    }
+                    else if (e.offsetX > panel.scrollWidth-BORDER_SIZE) {
+                        m_pos = e.x;
+                        document.addEventListener("mousemove", resizeRight, false);
+                    }
+                    
+//                        console.log("ey: " + e.offsetY);
+                    if(e.offsetY < BORDER_SIZE) {
+                        m_pos = e.y;
+                        document.addEventListener("mousemove", resizeTop, false);
+                    }
+                    else if (e.offsetY > panel.scrollHeight-BORDER_SIZE){
+                        m_pos = e.y;
+                        document.addEventListener("mousemove", resizeBottom, false);
+                    }
+
+
+                }, false);
+
+                document.addEventListener("mouseup", function(){
+                    panel.offsetHeight; // Trigger a reflow, flushing the CSS changes
+                    panel.offsetWidth; // Trigger a reflow, flushing the CSS changes
+                    panel.classList.remove('window-no-transition');
+                    document.removeEventListener("mousemove", resizeLeft, false);
+                    document.removeEventListener("mousemove", resizeRight, false);
+                    document.removeEventListener("mousemove", resizeTop, false);
+                    document.removeEventListener("mousemove", resizeBottom, false);
+                }, false);
+
+
+            }
+            
+            function closeWindow(element) {
+                var info = element.parentElement;
+                var header = info.parentElement;
+
+                header.parentElement.style.left = '15px';
+                header.parentElement.style.top = 'calc(50% - 75px)';
+                header.parentElement.style.minHeight = '150px';
+                header.parentElement.style.height = '150px';
+                header.parentElement.style.minWidth = '175px';
+                header.parentElement.style.width = '175px';
+                header.parentElement.style.visibility = 'hidden';
+                header.parentElement.style.opacity = '0';
+            }
+            
+            function openWindow(index) {
+                
+                windows[index].style.left = 'calc(50% - 325px)';
+                windows[index].style.top = 'calc(50% - 200px)';
+                windows[index].style.minWidth = '675px';
+                windows[index].style.width = '675px';
+                windows[index].style.minHeight = '400px';
+                windows[index].style.height = '400px';
+                windows[index].style.visibility = 'visible';
+                windows[index].style.opacity = '1';
+                windows[index].style.zIndex = lastZ++;
+                windows[index].setAttribute("maximized", "false");
+                
+            }
+            
+            function maxWindow(element) { 
+                console.log("max init");
+                element.classList.remove('window-no-transition');
+                
+                var info = element.parentElement;
+                var header = info.parentElement;
+                var window = header.parentElement;
+                
+                
+//                console.log("maz ? " + window.getAttribute("maximized"));
+                
+                if (window.getAttribute("maximized")=="true"){
+                    window.style.width = '600px';
+                    window.style.height = '400px';
+                    window.style.top = '20%';
+                    window.style.left = '20%';
+                    window.setAttribute("maximized", "false");
+                }
+                else {
+                    window.style.width = 'calc(100% - 70px)';
+                    window.style.height = '100%';
+                    window.style.top = '0';
+                    window.style.left = '70px';
+                    window.setAttribute("maximized", "true");
+                }
+                
+                
+                
+//                width: 500px;
+//                height: 350px;
+//                top
+//                left
+            }
+            
+            function contactsScreen(elmnt, screen, isHome) {
+                
+//                if (elmnt.nodeName == "A") {
+//                    var conatiner = elmnt.parentElement;
+//                
+//                    var translucentPanel = conatiner.parentElement;
+//                    var windowBody = translucentPanel.parentElement;
+//                    var mainWindow = windowBody.parentElement;
+//
+//                    var list = mainWindow.querySelector('ul');
+//
+//                    var anchors = list.querySelectorAll('a');
+//                }
+//                else {
+//                    var conatiner = elmnt.parentElement;
+//                
+//                    var translucentPanel = conatiner.parentElement;
+//                    var mainWindow = translucentPanel.parentElement;
+//                    
+//                    var list = mainWindow.querySelector('ul');
+//
+//                    var anchors = list.querySelectorAll('a');
+//                }
+                
+                var mainWindow = elmnt.closest('.window');
+                var list = mainWindow.querySelector('ul');
+                var anchors = list.querySelectorAll('a');
+                    
+                
+                
+                for (i = 0; i < anchors.length; ++i) {
+//                    console.log(anchors[i]);
+                    anchors[i].querySelector('li').classList.remove('active');
+                }
+                
+                if (elmnt.nodeName == "A") {elmnt.querySelector('li').classList.add('active');}
+                
+                
+                
+                if (isHome == true) {mainWindow.querySelector('.sub-info-icon').style.visibility="hidden"}
+                else {mainWindow.querySelector('.sub-info-icon').style.visibility="visible"}
+                
+                mainWindow.querySelector('.content').style.opacity = 0;
+                
+                setTimeout(function(){ 
+                  fetch('screens/' + screen + '.html')
+                    .then(response => response.text())
+                    .then(text => mainWindow.querySelector('.content').innerHTML=text);
+                    
+                  
+                  mainWindow.querySelector('.content').style.opacity = 1;
+              },300);
+
+                    console.log(mainWindow.querySelector('.content').innerHTML);
+            }
+
+            
+        </script>
+
+    </body>
+
+
+</html>

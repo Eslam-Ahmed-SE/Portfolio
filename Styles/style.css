@@ -1,0 +1,557 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;    /* iOS Safari */
+    -webkit-user-select: none;      /* Safari */
+    -khtml-user-select: none;       /* Konqueror HTML */
+    -moz-user-select: none;         /* Old versions of Firefox */
+    -ms-user-select: none;          /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+i.flip {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: RGBA(255, 255, 255, 0); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: RGBA(125, 125, 125, 0.75);
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: RGBA(125, 125, 125, 1);
+}
+
+/*
+
+html, body, #fullheight {
+    min-height: 100% !important;
+    height: 100%;
+}
+*/
+
+.main-screen {
+    background-image: url("../imgs/background/2.jpg");
+    width: 100vw;
+    height: 100vh;
+    background-size: 100vw auto;
+    overflow: hidden;
+}
+
+.desktop-screen {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.side-bar {
+    position: absolute;
+    width: 56px;
+    z-index: 999;
+/*    height: 60%;*/
+    left: 10px;
+    top: 20%;
+/*    bottom: 20%;*/
+    padding: 5px 0;
+    border-radius: 10px;
+    background: RGBA(255, 255, 255, 0.5);
+    box-shadow: 0 15px 35px RGBA(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+}
+
+.side-bar .icon {
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    margin: 8px 8px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 10px RGBA(0, 0, 0, 0.10);
+    background: RGBA(255, 255, 255, 1);
+    cursor: pointer;
+    position: relative;
+    
+}
+
+.side-bar .icon .tooltiptext {
+    visibility: hidden;
+    line-height: 25px;
+    padding: 0 5px;
+    white-space:nowrap;
+    max-width:none;
+    color: black;
+    text-align: center;
+    /*  padding: 5px 0;*/
+    border-radius: 6px;
+    font-size: 0.75em;
+    position: absolute;
+    
+    top: 5px;
+    left: 125%;
+    
+    
+/*
+    top: 100%;
+    left: 50%;
+    margin-left: -25px;
+*/
+    
+    z-index: 1;
+    cursor: auto;
+    box-shadow: 0 5px 10px RGBA(0, 0, 0, 0.10);
+    background: RGBA(255, 255, 255, 0.65);
+    backdrop-filter: blur(30px);
+}
+
+
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.side-bar .icon:hover .tooltiptext {
+  visibility: visible;
+}
+
+.window {
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    z-index: 9;
+    width: 675px;
+    height: 400px;
+    min-width: 675px;
+    min-height: 400px;
+    top: 10%;
+    left: 20%;
+    border-radius: 10px;
+/*    padding: 15px;*/
+/*    background: RGBA(255, 255, 255, 1);*/
+    box-shadow: 0 0px 10px RGBA(0, 0, 0, 0.15);
+/*
+    resize: both;
+    border: 1px solid;
+*/
+    
+    -webkit-transition:
+        width 300ms ease-in-out, 
+        height 300ms ease-in-out,
+        top 300ms ease-in-out,
+        left 300ms ease-in-out,
+        opacity 300ms ease-in-out,
+        overflow 300ms ease-in-out,
+        visibility 350ms ease-in-out;
+    -moz-transition:
+        width 300ms ease-in-out, 
+        height 300ms ease-in-out,
+        top 300ms ease-in-out,
+        left 300ms ease-in-out,
+        opacity 300ms ease-in-out,
+        overflow 300ms ease-in-out,
+        visibility 350ms ease-in-out;
+    -o-transition:
+        width 300ms ease-in-out, 
+        height 300ms ease-in-out,
+        top 300ms ease-in-out,
+        left 300ms ease-in-out,
+        opacity 300ms ease-in-out,
+        overflow 300ms ease-in-out,
+        visibility 350ms ease-in-out;
+    transition:
+        width 300ms ease-in-out, 
+        height 300ms ease-in-out,
+        top 300ms ease-in-out,
+        left 300ms ease-in-out,
+        opacity 300ms ease-in-out,
+        overflow 300ms ease-in-out,
+        visibility 350ms ease-in-out;
+}
+
+.window-no-transition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+
+.window .window-body {
+    position: absolute;
+    height: calc(100%-35px);
+    left: 0;
+    right: 0;
+    top: 45px;
+    bottom: 0;
+/*    border-radius: 0 0 15px 15px;*/
+    z-index: 0;
+}
+
+.window .translucent-panel {
+    margin: 0;
+    float: left;
+    width: 200px;
+    text-align: center;
+    overflow: hidden;
+    height: 100%;
+/*
+    background: RGBA(255, 255, 255, 0.5);
+    border-radius: 0 0 0 10px;
+    backdrop-filter: blur(20px);
+    
+*/
+    
+
+    
+}
+
+.window .translucent-panel:hover {
+    overflow: overlay;
+}
+
+.window .translucent-panel img {
+    width: 100px;
+    border-radius: 50%;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.window .translucent-panel h5 {
+    opacity: 0.5;
+    font-size: 0.85em;
+    cursor: pointer;
+    margin-bottom: 50px;
+}
+
+.window .translucent-panel input {
+    margin-bottom: 25px;
+}
+
+.window .translucent-panel ul {
+    
+    margin-bottom: 50px;
+}
+
+.window .translucent-panel a {
+    text-decoration: none;
+    color: black;
+    line-height: 35px;
+    text-align: left;
+}
+
+.window .translucent-panel a:hover > li {
+    background: RGBA(0, 0, 0, 0.10);
+    backdrop-filter: blur(20px);
+}
+
+.window .translucent-panel a li.active {
+    background: RGBA(0, 0, 0, 0.10);
+    backdrop-filter: blur(20px);
+}
+
+.window .translucent-panel a li {
+    width: calc(100% - 20px);
+    margin: 5px 10px;
+    border-radius: 5px;
+}
+
+.window .translucent-panel a li i {
+    margin: 0 10px;
+    color: RGBA(0, 85, 220, 1);
+    width: 15px;
+    text-align: center;
+}
+
+.window .translucent-panel a li span {
+    position: relative;
+    left: 10px;
+}
+    
+.window .main-panel {
+    margin: 0;
+    margin-left: 200px;   
+/*    width: calc(100%-500px);*/
+    height: calc(100% - 40px);
+    background: RGBA(255, 255, 255, 1);
+    border-radius: 0 0 10px 0;
+    overflow: hidden;
+    
+    
+    
+    padding: 20px 10px;
+    
+}
+
+.window .main-panel:hover {
+    overflow: overlay;
+}
+
+.window .main-panel .content {
+    -webkit-transition:
+        opacity 300ms ease-in-out;
+    -moz-transition:
+        opacity 300ms ease-in-out;
+    -o-transition:
+        opacity 300ms ease-in-out;
+    transition:
+        opacity 300ms ease-in-out;
+    
+}
+
+.window .main-panel .content div {
+    text-align: center;
+}
+
+.window .main-panel .content div img {
+    width: 150px;
+    border-radius: 50%;
+}
+
+.window .main-panel .content div h3 {
+    font-size: 1.6em;
+    margin-top: 15px;
+}
+
+
+
+.window .main-panel .content div ul {
+    list-style-type: none;
+}
+
+.window .main-panel .content div ul li {
+    display: inline-block;
+    margin: 15px 15px;
+}
+
+.window .main-panel .content div ul a {
+    text-decoration: none;
+    color: black;
+}
+
+.window .main-panel .content div ul li i {
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 1px solid RGBA(0, 0, 0, 0.15);
+    border-radius: 50%;
+    padding: 5px;
+    color: RGBA(0, 120, 250, 1);
+}
+
+.window .main-panel .content div ul li span {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    margin-top: 3px;
+    font-size: 0.9em;
+    display: block;
+    color: RGBA(0, 120, 250, 1);
+}
+
+.window .main-panel .content div form {
+    text-align: center;
+    width: 80%;
+    margin: auto 10%;
+}
+
+.window .main-panel .content div form p {
+    float: left;
+}
+
+.window .main-panel .content div form .input {
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid RGBA(0, 0, 0, 0.15);
+    margin: 10px auto;
+    padding: 10px 0;
+}
+
+.window .main-panel .content div form .input label {
+    text-align: left;
+    display: table-cell;
+    width: 25px;
+}
+
+.window .main-panel .content div form .input input {
+    display: table-cell;
+    width: 100%;
+    border: 0;
+}
+
+.window .main-panel .content div form .input input:active,
+.window .main-panel .content div form .input input:focus,
+.window .main-panel .content div form textarea:active,
+.window .main-panel .content div form textarea:focus {
+    outline: none;
+}
+
+.window .main-panel .content div form textarea {
+    width: 100%;
+    border: 0;
+    height: 150px;
+/*    display: table-cell;*/
+}
+
+.window .main-panel .content div form button {
+    float: right;
+    padding: 10px;
+    border: 0;
+    border-radius: 50%;
+    background: RGBA(0, 120, 250, 1);
+    color: white;
+}
+
+.window:before {
+    content: " ";
+/*    background-color: #ccc;*/
+    position: absolute;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    cursor: w-resize;
+    z-index: 5;
+}
+
+.window:after {
+    content: " ";
+/*    background-color: #ccc;*/
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 4px;
+    width: 100%;
+    cursor: n-resize;
+}
+
+.window .resize-border-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    cursor: w-resize;
+}
+
+.window .resize-border-top {
+    z-index: 15;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: n-resize;
+    width: 100%;
+    height: 4px;
+}
+
+.window-header {
+    z-index: 10;
+    height: 45px;
+    border-radius: 10px 10px 0 0;
+}
+
+.window-header .info {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+/*    height: 35px;*/
+    bottom: 0;
+    border-radius: 10px 0 0 10px;
+    width: 200px;
+    background: RGBA(255, 255, 255, 0.5);
+    backdrop-filter: blur(35px);
+}
+
+.window-header .sub-info {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 43px;
+/*    bottom: 0;*/
+    border-radius: 0 10px 0 0;
+    width: calc( 100% - 200px);
+    background: RGBA(255, 255, 255, 1);
+    border-bottom: 2px solid RGBA(230, 230, 230, 1);
+}
+
+.window-header .info .close {
+    position: absolute;
+    display: inline-block;
+    background: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 17.5px 15px 17.5px 15px;
+    cursor: pointer;
+}
+
+.window-header .info .minimize {
+    position: absolute;
+    display: inline-block;
+    background: grey;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 17.5px 15px 17.5px 30px;
+    cursor: not-allowed;
+}
+
+.window-header .info .maximize {
+    position: absolute;
+    display: inline-block;
+    background: green;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 17.5px 15px 17.5px 45px;
+    cursor: pointer;
+}
+
+.window-header .info .info-text {
+    position: relative;
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    margin-left: 65px;
+}
+
+.window-header .sub-info .sub-info-text {
+    position: relative;
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    margin-left: 25px;
+}
+
+.window-header .sub-info .sub-info-icon {
+    position: relative;
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    margin-left: 25px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
