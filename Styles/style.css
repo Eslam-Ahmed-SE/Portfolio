@@ -127,7 +127,7 @@ html, body, #fullheight {
 }
 
 .window {
-    visibility: visible;
+    visibility: hidden;
     opacity: 1;
     position: absolute;
     z-index: 9;
@@ -313,10 +313,7 @@ html, body, #fullheight {
     text-align: center;
 }
 
-.window .main-panel .content div img {
-    width: 150px;
-    border-radius: 50%;
-}
+
 
 .window .main-panel .content div h3 {
     font-size: 1.6em;
