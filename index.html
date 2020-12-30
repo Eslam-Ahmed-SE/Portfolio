@@ -33,7 +33,7 @@
 -->
             </div>
             
-            <div class="window" maximized="false" icon-i="fas fa-info" icon-color="white" icon-bg-color="red" icon-name="Contacts">
+            <div class="window" maximized="false" icon-i="fas fa-info" icon-color="white" icon-bg-color="red" icon-name="Contacts" >
                 <div class="window-header">
                     <div class="resize-border-top"></div>
                     <div class="info">
@@ -43,20 +43,20 @@
                         <span class="info-text">asd</span>
                     </div>
                     <div class="sub-info">
-                        <span class="sub-info-icon" onclick="contactsScreen(this, 'contacts', true)"><i class="far fa-chevron-left"></i></span><span class="sub-info-text">asd</span>
+                        <span class="sub-info-icon" onclick="contactsScreen(this, 'contacts.html', true)"><i class="far fa-chevron-left"></i></span><span class="sub-info-text">asd</span>
                     </div>
                 </div>
                 <div class="window-body">
                     <div class="translucent-panel">
-                        <img src="imgs/profile.jpg" onclick="contactsScreen(this, 'contacts', true)"/>
-                        <h5 onclick="contactsScreen(this, 'contacts', true)">Eslam Ahmed</h5>
+                        <img src="imgs/profile.jpg" onclick="contactsScreen(this, 'contacts.html', true)"/>
+                        <h5 onclick="contactsScreen(this, 'contacts.html', true)">Eslam Ahmed</h5>
                         <ul class="links-List">
-                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-envelope"></i><span>Mail</span></li></a>
-                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-phone flip"></i><span>Phone</span></li></a>
-                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-users"></i><span>Socials</span></li></a>
+                            <a href="#" onclick="contactsScreen(this, 'mail.html', false)"><li><i class="far fa-envelope"></i><span>Mail</span></li></a>
+                            <a href="#" onclick="contactsScreen(this, 'mail.html', false)"><li><i class="far fa-phone flip"></i><span>Phone</span></li></a>
+                            <a href="#" onclick="contactsScreen(this, 'mail.html', false)"><li><i class="far fa-users"></i><span>Socials</span></li></a>
                         </ul>
                     </div>
-                    <div class="main-panel"><div class="content" id="contacts-panel"></div></div>
+                    <div class="main-panel"><div class="content" content-url="contacts.html"></div></div>
                 </div>
                 <div class="resize-border-left"></div>
             </div>
@@ -71,18 +71,18 @@
                         <span class="info-text"></span>
                     </div>
                     <div class="sub-info">
-                        <span class="sub-info-icon" onclick="contactsScreen(this, 'projects', true)"><i class="far fa-chevron-left"></i></span><span class="sub-info-text">Projects</span>
+                        <span class="sub-info-icon" onclick="contactsScreen(this, 'projects.html', true)"><i class="far fa-chevron-left"></i></span><span class="sub-info-text">Projects</span>
                     </div>
                 </div>
                 <div class="window-body">
                     <div class="translucent-panel">
                         <input type="search" name="projectsSearch" placeholder="Search"/>
                         <ul class="links-List">
-                            <a href="#" onclick="contactsScreen(this, 'projects-mobile', false)"><li><i class="far fa-mobile-android"></i><span>Mobile Apps</span></li></a>
-                            <a href="#" onclick="contactsScreen(this, 'mail', false)"><li><i class="far fa-browser"></i><span>Web Apps</span></li></a>
+                            <a href="#" onclick="contactsScreen(this, 'projects-gallery.php?project-category=mobile', false)"><li><i class="far fa-mobile-android"></i><span>Mobile Apps</span></li></a>
+                            <a href="#" onclick="contactsScreen(this, 'projects-gallery.php?project-category=web', false)"><li><i class="far fa-browser"></i><span>Web Apps</span></li></a>
                         </ul>
                     </div>
-                    <div class="main-panel"><div class="content" id="projects-panel"></div></div>
+                    <div class="main-panel"><div class="content" content-url="projects.html"></div></div>
                 </div>
                 <div class="resize-border-left"></div>
             </div>
@@ -131,17 +131,27 @@
                 newAnchorNode.setAttribute("onclick", "openWindow(" + i + ")");
                 sideBar.appendChild(newAnchorNode);
                 
+                var currentWindowContent = windows[i].querySelector('.content');
+                                
+                getContent('screens/' + currentWindowContent.getAttribute("content-url"), currentWindowContent);
                 
             }
             
+            async function getContent(screen, currentWindowContent) {
+                const response = await fetch(screen);
+                const text = await response.text();
+                currentWindowContent.innerHTML=text;
+                return;
+            }
             
-            fetch('screens/contacts.html')
-              .then(response => response.text())
-              .then(text => document.querySelector('#contacts-panel').innerHTML=text);     
-            
-            fetch('screens/projects.html')
-              .then(response => response.text())
-              .then(text => document.querySelector('#projects-panel').innerHTML=text);     
+//            
+//            fetch('screens/contacts.html')
+//              .then(response => response.text())
+//              .then(text => document.querySelector('#contacts-panel').innerHTML=text);     
+//            
+//            fetch('screens/projects.html')
+//              .then(response => response.text())
+//              .then(text => document.querySelector('#projects-panel').innerHTML=text);     
             
             
             
@@ -427,8 +437,9 @@
                 
                 mainWindow.querySelector('.content').style.opacity = 0;
                 
+                console.log('screens/' + screen);
                 setTimeout(function(){ 
-                  fetch('screens/' + screen + '.html')
+                  fetch('screens/' + screen)
                     .then(response => response.text())
                     .then(text => mainWindow.querySelector('.content').innerHTML=text);
                     

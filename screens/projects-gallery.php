@@ -1,7 +1,9 @@
 <div class="projects-mobile">
     
+    <h2><?php echo ucfirst($_GET["project-category"]); ?> apps projects</h2>
+    
     <div class="project-card">
-        <img src="imgs/test-poejects/1.png">
+        <img src="imgs/test-poejects/1.jpg">
         <a href="#">
             <div class="info-container">
                 <h4>Project name 1</h4>
@@ -11,7 +13,7 @@
         </a>
     </div>
     <div class="project-card">
-        <img src="imgs/test-poejects/2.jpg">
+        <img src="imgs/test-poejects/2.png">
         <a href="#">
             <div class="info-container">
                 <h4>Project name 2</h4>
@@ -21,7 +23,7 @@
         </a>
     </div>
     <div class="project-card">
-        <img src="imgs/test-poejects/3.png">
+        <img src="imgs/test-poejects/3.jpeg">
         <a href="#">
             <div class="info-container">
                 <h4>Project name 3</h4>
@@ -31,7 +33,7 @@
         </a>
     </div>
     <div class="project-card">
-        <img src="imgs/test-poejects/4.jpg">
+        <img src="imgs/test-poejects/4.png">
         <a href="#">
             <div class="info-container">
                 <h4>Project name 4</h4>
@@ -55,22 +57,29 @@
 
 <style>
     
+    .projects-mobile h2 {
+        text-align: left;
+        padding: 0 15px 15px 15px;        
+    }
+    
     .projects-mobile .project-card {
         width: 30%;
         min-width: 300px;
         display: inline-block;
         vertical-align: middle;
         margin: 15px;
-/*        position: relative;*/
         border-radius: 5px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
         position: relative;
+        background: RGBA(255, 255, 255, 0);
     }
     
     .projects-mobile .project-card img {
         width: 100%;
 /*        margin-bottom: 15px;*/
-        border-radius: 5px 5px 0 0;
+/*        border-radius: 5px 5px 0 0;*/
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
     
     .projects-mobile .project-card a {
@@ -93,7 +102,7 @@
         padding: 5px 5px 10px;
         width: calc(100% - 10px);
         border-radius: 0 0 5px 5px;
-        background: RGBA(255, 255, 255, 0.45);
+        background: RGBA(255, 255, 255, 0.65);
         backdrop-filter: blur(15px);
         opacity: 0;
         -webkit-transition:
