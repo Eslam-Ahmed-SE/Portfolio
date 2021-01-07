@@ -38,7 +38,7 @@
                     <div class="resize-border-top"></div>
                     <div class="info">
                         <span class="close" onclick="closeWindow(this)"></span>
-                        <span class="minimize" onclick=""></span>
+                        <span class="minimize" onclick="minWindow(this)"></span>
                         <span class="maximize" onclick="maxWindow(this)"></span>
                         <span class="info-text">asd</span>
                     </div>
@@ -66,12 +66,12 @@
                     <div class="resize-border-top"></div>
                     <div class="info">
                         <span class="close" onclick="closeWindow(this)"></span>
-                        <span class="minimize" onclick=""></span>
+                        <span class="minimize" onclick="minWindow(this)"></span>
                         <span class="maximize" onclick="maxWindow(this)"></span>
                         <span class="info-text"></span>
                     </div>
                     <div class="sub-info">
-                        <span class="sub-info-icon" onclick="contactsScreen(this, 'projects.html', true)"><i class="far fa-chevron-left"></i></span><span class="sub-info-text">Projects</span>
+                        <span class="sub-info-icon" onclick="contactsScreen(this, 'projects-categories.html', true)"><i class="far fa-chevron-left"></i></span><span class="sub-info-text">Projects</span>
                     </div>
                 </div>
                 <div class="window-body">
@@ -82,7 +82,7 @@
                             <a href="#" onclick="contactsScreen(this, 'projects-gallery.php?project-category=web', false)"><li><i class="far fa-browser"></i><span>Web Apps</span></li></a>
                         </ul>
                     </div>
-                    <div class="main-panel"><div class="content" content-url="projects.html"></div></div>
+                    <div class="main-panel"><div class="content" content-url="projects-categories.html"></div></div>
                 </div>
                 <div class="resize-border-left"></div>
             </div>
@@ -96,46 +96,13 @@
         
         
         <script>
-            var screen = document.querySelector('.desktop-screen');
-            var sideBar = document.querySelector('.side-bar');
             
-            var availArea = screen.offsetHeight  - sideBar.offsetHeight ;
-            
-            sideBar.style.top = availArea/2 + "px";
             
             var windows = document.querySelectorAll('.window'), i, n;
             
             
-            for (i = 0; i < windows.length; ++i) {
-                var newAnchorNode = document.createElement("A");
-                newAnchorNode.classList.add('icon');
-                
-                var newINode = document.createElement("I");
-                
-                var newTooltip = document.createElement("SPAN");
-                newTooltip.classList.add('tooltiptext');
-                newTooltip.innerHTML = windows[i].getAttribute("icon-name");
-                
-                var iconList = windows[i].getAttribute("icon-i").split(" ");
-                
-                newAnchorNode.style.background = windows[i].getAttribute("icon-bg-color");
-                newAnchorNode.style.color = windows[i].getAttribute("icon-color");
-                
-                
-//                .style.left = '15px';
-                for (n=0; n<iconList.length; n++) {
-                    newINode.classList.add(iconList[n]);
-                }
-                newAnchorNode.appendChild(newINode);
-                newAnchorNode.appendChild(newTooltip);
-                newAnchorNode.setAttribute("onclick", "openWindow(" + i + ")");
-                sideBar.appendChild(newAnchorNode);
-                
-                var currentWindowContent = windows[i].querySelector('.content');
-                                
-                getContent('screens/' + currentWindowContent.getAttribute("content-url"), currentWindowContent);
-                
-            }
+            initIcons();
+            initDragResize();
             
             async function getContent(screen, currentWindowContent) {
                 const response = await fetch(screen);
@@ -157,15 +124,6 @@
             
             var lastZ = 10;
             var initPos = 20;
-
-            //Make the all element draggagle:
-            for (i = 0; i < windows.length; ++i) {
-                windows[i].style.left = initPos + "%";
-                windows[i].style.top = initPos + "%";
-                initPos+=5;
-                dragElement(windows[i]);
-                startResize(windows[i]);
-            }
 
             function dragElement(elmnt) {
                 
@@ -330,7 +288,7 @@
 
             }
             
-            function closeWindow(element) {
+            function minWindow(element) {
                 var info = element.parentElement;
                 var header = info.parentElement;
 
@@ -342,6 +300,17 @@
                 header.parentElement.style.width = '175px';
                 header.parentElement.style.visibility = 'hidden';
                 header.parentElement.style.opacity = '0';
+                
+                initIcons()
+            }
+            
+            function closeWindow(element) {
+                var info = element.parentElement;
+                var header = info.parentElement;
+
+                header.parentElement.remove();
+                
+                initIcons()
             }
             
             function openWindow(index) {
@@ -428,7 +397,12 @@
                     anchors[i].querySelector('li').classList.remove('active');
                 }
                 
-                if (elmnt.nodeName == "A") {elmnt.querySelector('li').classList.add('active');}
+                if (elmnt.nodeName == "A") {
+                    var activeLi = elmnt.querySelector('li');
+                    if (activeLi!=null){
+                        activeLi.classList.add('active');
+                    }
+                }
                 
                 
                 
@@ -449,6 +423,99 @@
 
                     console.log(mainWindow.querySelector('.content').innerHTML);
             }
+            
+            function initIcons() {
+                
+                var screen = document.querySelector('.desktop-screen');
+                var sideBar = document.querySelector('.side-bar');
+                
+                windows = document.querySelectorAll('.window');
+                
+                sideBar.innerHTML="";
+                
+                for (i = 0; i < windows.length; ++i) {
+                    var newAnchorNode = document.createElement("A");
+                    newAnchorNode.classList.add('icon');
+
+                    var newINode = document.createElement("I");
+
+                    var newTooltip = document.createElement("SPAN");
+                    newTooltip.classList.add('tooltiptext');
+                    newTooltip.innerHTML = windows[i].getAttribute("icon-name");
+
+                    var iconList = windows[i].getAttribute("icon-i").split(" ");
+
+                    newAnchorNode.style.background = windows[i].getAttribute("icon-bg-color");
+                    newAnchorNode.style.color = windows[i].getAttribute("icon-color");
+
+
+    //                .style.left = '15px';
+                    for (n=0; n<iconList.length; n++) {
+                        newINode.classList.add(iconList[n]);
+                    }
+                    newAnchorNode.appendChild(newINode);
+                    newAnchorNode.appendChild(newTooltip);
+                    newAnchorNode.setAttribute("onclick", "openWindow(" + i + ")");
+                    sideBar.appendChild(newAnchorNode);
+
+                    var currentWindowContent = windows[i].querySelector('.content');
+
+                    getContent('screens/' + currentWindowContent.getAttribute("content-url"), currentWindowContent);
+
+                }
+                
+                
+
+                var availArea = screen.offsetHeight  - sideBar.offsetHeight ;
+
+                sideBar.style.top = availArea/2 + "px";
+
+            }
+            
+            function initDragResize() {
+                for (i = 0; i < windows.length; ++i) {
+                    windows[i].style.left = initPos + "%";
+                    windows[i].style.top = initPos + "%";
+                    initPos+=5;
+                    dragElement(windows[i]);
+                    startResize(windows[i]);
+                }
+            }
+            
+            function KeyPress(e) {
+                var evtobj = window.event? event : e
+                if (evtobj.keyCode == 192 && evtobj.ctrlKey && evtobj.shiftKey){
+//                    alert("Administrator window will initiate");
+                    
+                    desktop = document.querySelector('.desktop-screen');
+                    
+                    setTimeout(function(){ 
+                      fetch('screens/admin-window.php')
+                        .then(response => response.text())
+                        .then(text => {
+                          var admin = document.createElement("div");
+                          admin.classList.add('window');
+                          admin.setAttribute('maximized', false);
+                          admin.setAttribute('icon-i', "fas fa-user-cog");
+                          admin.setAttribute('icon-color', "white");
+                          admin.setAttribute('icon-bg-color', "aqua");
+                          admin.setAttribute('icon-name', "Admin");
+                          admin.style.visibility="visible";
+                          admin.innerHTML = text;
+                          desktop.appendChild(admin);
+                         
+                          
+//                          console.log(windows);
+                          initIcons();
+                          initDragResize();
+                      });
+
+                    },300);
+                    
+                }
+            }
+
+            document.onkeydown = KeyPress;
 
             
         </script>

@@ -3,8 +3,8 @@
     <h2><?php echo ucfirst($_GET["project-category"]); ?> apps projects</h2>
     
     <div class="project-card">
-        <img src="imgs/test-poejects/1.jpg">
-        <a href="#">
+        <img src="imgs/test-poejects/1.png">
+        <a href="#" onclick="contactsScreen(this, 'project.php?projectID=1', false)">
             <div class="info-container">
                 <h4>Project name 1</h4>
                 <p>project info and sumarized description</p>
@@ -13,8 +13,8 @@
         </a>
     </div>
     <div class="project-card">
-        <img src="imgs/test-poejects/2.png">
-        <a href="#">
+        <img src="imgs/test-poejects/2.jpg">
+        <a href="#" onclick="contactsScreen(this, 'project.php?projectID=2', false)">
             <div class="info-container">
                 <h4>Project name 2</h4>
                 <p>project info and sumarized description, this text might get bigger to test two line description of the project</p>
@@ -23,8 +23,8 @@
         </a>
     </div>
     <div class="project-card">
-        <img src="imgs/test-poejects/3.jpeg">
-        <a href="#">
+        <img src="imgs/test-poejects/3.png">
+        <a href="#" onclick="contactsScreen(this, 'project.php?projectID=3', false)">
             <div class="info-container">
                 <h4>Project name 3</h4>
                 <p>project info and sumarized description</p>
@@ -33,8 +33,8 @@
         </a>
     </div>
     <div class="project-card">
-        <img src="imgs/test-poejects/4.png">
-        <a href="#">
+        <img src="imgs/test-poejects/4.jpg">
+        <a href="#" onclick="contactsScreen(this, 'project.php?projectID=4', false)">
             <div class="info-container">
                 <h4>Project name 4</h4>
                 <p>project info and sumarized description</p>
@@ -56,6 +56,10 @@
 </div>
 
 <style>
+    
+    .projects-mobile {
+        text-align: center;
+    }
     
     .projects-mobile h2 {
         text-align: left;

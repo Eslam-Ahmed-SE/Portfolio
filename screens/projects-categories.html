@@ -1,7 +1,7 @@
 <div class="projects">
     <h1>Categories</h1>
     
-    <a href="#" class="category-card">
+    <a href="#" class="category-card" onclick="contactsScreen(this, 'projects-gallery.php?project-category=mobile', false)">
         <i class="far fa-mobile-android"></i>
         <h5>Mobile applications</h5>
         <p class="info">Android and flutter applications</p>
@@ -12,7 +12,7 @@
         </p>
     </a>
     
-    <a href="#" class="category-card">
+    <a href="#" class="category-card" onclick="contactsScreen(this, 'projects-gallery.php?project-category=web', false)">
         <i class="far fa-browser"></i>
         <h5>Web applications</h5>
         <p class="info">Front-end and Back-end web applications development</p>
@@ -27,6 +27,11 @@
 </div>
 
 <style>
+    
+    .projects {
+        text-align: center;
+    }
+    
     .projects h1 {
         text-align: left;
         font-size: 1.5em;

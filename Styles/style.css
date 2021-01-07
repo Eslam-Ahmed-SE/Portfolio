@@ -17,6 +17,7 @@ i.flip {
 /* width */
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 /* Track */
@@ -309,9 +310,11 @@ html, body, #fullheight {
     
 }
 
+/*
 .window .main-panel .content div {
     text-align: center;
 }
+*/
 
 
 
@@ -496,12 +499,12 @@ html, body, #fullheight {
 .window-header .info .minimize {
     position: absolute;
     display: inline-block;
-    background: grey;
+    background: yellow;
     width: 10px;
     height: 10px;
     border-radius: 50%;
     margin: 17.5px 15px 17.5px 30px;
-    cursor: not-allowed;
+    cursor: pointer;
 }
 
 .window-header .info .maximize {
